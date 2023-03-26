@@ -10,17 +10,33 @@
             <li><a href="/">About us</a></li>
             <li><button style="cursor : pointer;" id="catatories">Categories</button>
             </li>
-            <li><a href="/">My Account</a></li>
+            <li>
+                <?php
+                if (isset($_SESSION["name"])) {
+                    $name = $_SESSION["name"];
+                    $link = "/profile";
+                    if($_SESSION["role"]=="admin") $link = "/admin";
+                    echo "<a href='$link'>$name</a>";
+                }
+                else  echo "<a href='/login'>Login</a>";
+                ?>
+
+            </li>
         </ul>
         <ul class="account-items">
-            <li><a href="/">
+            <li><a href="/profile">
                     <img src="/assets/user.svg" alt="">
                 </a></li>
+                <!-- <li><a href="/">
+                    <img src="/assets/icons8-login-rounded-100.png" alt="">
+                </a>
+            </li> -->
             <li><a href="/">
                     <img src="/assets/shopping-bag.svg" alt="">
                     <p>(0)</p>
                 </a>
             </li>
+            
         </ul>
     </div>
 

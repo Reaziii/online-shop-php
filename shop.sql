@@ -1,25 +1,19 @@
--- creating admin table;
-CREATE TABLE IF NOT EXISTS administrator(
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(2550) NOT NULL,
-    proImage VARCHAR(255) NOT NULL
+--creating user database
+CREATE TABLE IF NOT EXISTS users(
+    id int(10) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    address VARCHAR(100),
+    proImage VARCHAR(100) NOT NULL DEFAULT "/uploads/user.svg",
+    role VARCHAR(10) NOT NULL DEFAULT "member",
+    PRIMARY KEY(id, email, phone)
 );
 
--- Inserting admin details
-INSERT INTO
-    administrator (name, email, password, proImage)
-SELECT
-    'Admin',
-    'admin@shop.com',
-    '21232f297a57a5a743894a0e4a801fc3',
-    '/uploads/default.jpeg'
-WHERE
-    NOT EXISTS (
-        SELECT
-            1
-        FROM
-            administrator
-        WHERE
-            email = 'admin@shop.com'
-    );
+CREATE TABLE IF NOT EXISTS catagories(
+    id int(10) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    photo VARCHAR(100) NOT NULL,
+    PRIMARY KEY(id)
+);
