@@ -6,7 +6,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
     die();
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"]) && isset($_POST["password"])) {
-    include $_SERVER["DOCUMENT_ROOT"] . "/db.php";
+    include ROOT . "/db.php";
     $email = $_POST["email"];
     $password = $_POST["password"];
     $password = md5($password);
@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"]) && isset($_PO
         $_SESSION["name"] = $user["name"];
         $_SESSION["role"] = $user["role"];
         $_SESSION["proImage"] = $user["proImage"];
+        $_SESSION["userid"] = $user["id"];
     }
 
 }
@@ -37,7 +38,7 @@ if (isset($_SESSION["email"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/views/links.php";
+    <?php include ROOT . "/views/links.php";
     ?>
 
 </head>
@@ -46,7 +47,7 @@ if (isset($_SESSION["email"])) {
 
 
 <body>
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/views/header.php" ?>
+    <?php include ROOT . "/views/header.php" ?>
     <form action method="POST" class="login-box">
         <h3>Welcome Back!</h3>
         <p class="input1-level">Email</p>

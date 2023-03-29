@@ -21,7 +21,7 @@ if (!isset($_SESSION["email"]) || $_SESSION["role"] != "admin") {
     <div class="menu-items">
         <a href="/"><p>Dashboard</p></a>
         <a href="/admin/catagories"><p>Catagories</p></a>
-        <a href="/"><p>Products</p></a>
+        <a href="/admin/products"><p>Products</p></a>
         <a href="/"><p>Users</p></a>
         <a href="/"><p>Orders</p></a>
     </div>

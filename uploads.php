@@ -17,3 +17,17 @@ function upload($file)
         return "error";
     }
 }
+
+function restructure_files_array($files) {
+    $file_array = array();
+    $file_count = count($files['name']);
+    $file_keys = array_keys($files);
+
+    for ($i=0; $i<$file_count; $i++) {
+        foreach ($file_keys as $key) {
+            $file_array[$i][$key] = $files[$key][$i];
+        }
+    }
+
+    return $file_array;
+}

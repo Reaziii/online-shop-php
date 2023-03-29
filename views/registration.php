@@ -5,7 +5,7 @@ $phone = "";
 $name = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include $_SERVER["DOCUMENT_ROOT"] . "/db.php";
+    include ROOT . "/db.php";
     if (!isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["name"]) || !isset($_POST["phone"])) {
         echo '<script>alert("Please fillup all the fields")</script>';
     } else {
@@ -53,7 +53,7 @@ if (isset($_SESSION["email"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/views/links.php";
+    <?php include ROOT . "/views/links.php";
     ?>
 
 </head>
@@ -62,7 +62,7 @@ if (isset($_SESSION["email"])) {
 
 
 <body>
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/views/header.php" ?>
+    <?php include ROOT . "/views/header.php" ?>
     <form action method="POST" class="login-box registration">
         <h3>Join Now!</h3>
         <p class="input1-level">Full name</p>

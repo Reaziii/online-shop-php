@@ -1,6 +1,7 @@
 <?php
-include $_SERVER["DOCUMENT_ROOT"] . "/db.php";
+include ROOT . "/db.php";
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,11 +11,11 @@ include $_SERVER["DOCUMENT_ROOT"] . "/db.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/views/links.php" ?>
+    <?php include ROOT . "/views/links.php" ?>
 </head>
 
 <body>
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/views/header.php" ?>
+    <?php include ROOT . "/views/header.php" ?>
     <section class="landing-page">
         <div class="owl-carousel owl-theme">
             <div style="background : black" class="item landing-items">

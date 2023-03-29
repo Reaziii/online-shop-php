@@ -9,13 +9,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <?php
-  include $_SERVER["DOCUMENT_ROOT"] . "/views/links.php"; ?>
+  include ROOT . "/views/links.php"; ?>
 
 </head>
 
 <body>
   <?php
-  include $_SERVER["DOCUMENT_ROOT"] . "/views/Admin/nav.php"; ?>
+  include ROOT . "/views/Admin/nav.php"; ?>
 
 
 </body>

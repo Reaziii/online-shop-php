@@ -1,3 +1,32 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["name"]) && $_FILES["file"]) {
+        include ROOT . "/uploads.php";
+        include ROOT . "/db.php";
+
+        $name = $_POST["name"];
+        $file = $_FILES["file"];
+        $filename = upload($file);
+        $sql = "INSERT INTO catagories (name, photo) VALUES ('$name','$filename')";
+        try {
+            mysqli_query($conn, $sql);
+            echo '<script>alert("Catagories created successfully")</script>';
+        } catch (Exception $err) {
+            echo '<script>alert("Something went wrong")</script>';
+        }
+    }
+    if (isset($_POST["delete-catagory"])) {
+        include ROOT . "/db.php";
+        $id = $_POST["delete-catagory"];
+        $sql = "DELETE FROM catagories WHERE id=$id";
+        try {
+            mysqli_query($conn, $sql);
+        } catch (Exception $err) {
+            echo '<script>alert("Something went wrong")</script>';
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,14 +36,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <?php
-    include $_SERVER["DOCUMENT_ROOT"] . "/views/links.php";
-    include $_SERVER["DOCUMENT_ROOT"] . "/db.php";
+    include ROOT . "/views/links.php";
+    include ROOT . "/db.php";
     ?>
 </head>
 
 <body>
     <?php
-    include $_SERVER["DOCUMENT_ROOT"] . "/views/Admin/nav.php";
+    include ROOT . "/views/Admin/nav.php";
     ?>
 
     <div class="admin-dash">
@@ -72,32 +101,3 @@
 </body>
 
 </html>
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["name"]) && $_FILES["file"]) {
-        include $_SERVER["DOCUMENT_ROOT"] . "/uploads.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/db.php";
-
-        $name = $_POST["name"];
-        $file = $_FILES["file"];
-        $filename = upload($file);
-        $sql = "INSERT INTO catagories (name, photo) VALUES ('$name','$filename')";
-        try {
-            mysqli_query($conn, $sql);
-            echo '<script>alert("Catagories created successfully")</script>';
-        } catch (Exception $err) {
-            echo '<script>alert("Something went wrong")</script>';
-        }
-    }
-    if (isset($_POST["delete-catagory"])) {
-        include $_SERVER["DOCUMENT_ROOT"] . "/db.php";
-        $id = $_POST["delete-catagory"];
-        $sql = "DELETE FROM catagories WHERE id=$id";
-        try {
-            mysqli_query($conn, $sql);
-        } catch (Exception $err) {
-            echo '<script>alert("Something went wrong")</script>';
-        }
-    }
-}
