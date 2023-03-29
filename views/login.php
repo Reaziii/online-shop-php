@@ -1,12 +1,8 @@
 <?php
+include ROOT . "/db.php";
 $email = "";
 $password = "";
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-    header("Location: /profile");
-    die();
-}
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"]) && isset($_POST["password"])) {
-    include ROOT . "/db.php";
     $email = $_POST["email"];
     $password = $_POST["password"];
     $password = md5($password);
@@ -23,10 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"]) && isset($_PO
         $_SESSION["proImage"] = $user["proImage"];
         $_SESSION["userid"] = $user["id"];
     }
-
 }
 if (isset($_SESSION["email"])) {
-    header("Location: /profile");
+    header("Location: /");
     die();
 }
 ?>

@@ -27,8 +27,6 @@ if ($code == 200 && !(curl_errno($handle))) {
         $productid = $product["productId"];
         mysqli_query($conn, "DELETE FROM cart WHERE userid=$userid and productId=$productid LIMIT 1");
     }
-
-    mysqli_query($conn, "UPDATE orders SET status='payment' WHERE turn_id='$tran_id'");
 } else {
     echo "Failed to connect with SSLCOMMERZ";
 }

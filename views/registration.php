@@ -28,11 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             try {
                 mysqli_query($conn, $sql);
-                $_SESSION["email"] = $email;
-                $_SESSION["name"] = $name;
-                if ($cnt == 0) {
-                    $_SESSION["role"] = "admin";
-                } else $_SESSION["role"] = "member";
+                header("Location: /login");
+                die();
             } catch (Exception $e) {
                 echo '<script>alert("Something went wrong")</script>';
                 echo $e;

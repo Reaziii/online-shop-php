@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             $uuid = uniqid();
-            $sql = "INSERT INTO orders VALUES('$uuid','pending', '$address', '$userid','$phone','$name','$notes')";
+            $sql = "INSERT INTO orders VALUES('$uuid','pending', '$address', '$userid','$phone','$name','$notes', NOW())";
             mysqli_query($conn, $sql);
             $sql = "SELECT * FROM cart WHERE userid=$userid";
             $cartitems = mysqli_query($conn, $sql);

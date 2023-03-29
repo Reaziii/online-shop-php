@@ -23,6 +23,6 @@ if (!isset($_SESSION["email"]) || $_SESSION["role"] != "admin") {
         <a href="/admin/catagories"><p>Catagories</p></a>
         <a href="/admin/products"><p>Products</p></a>
         <a href="/"><p>Users</p></a>
-        <a href="/"><p>Orders</p></a>
+        <a href="/admin/orders"><p>Orders</p></a>
     </div>
 </nav>
