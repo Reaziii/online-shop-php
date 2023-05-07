@@ -48,7 +48,7 @@ if ($code == 200 && !(curl_errno($handle))) {
     <?php include ROOT . "/views/header.php" ?>
     <div class="payment-done">
         <h1>Payment Recieved</h1>
-        <p>Track my <a href="/">orders</a></p>
+        <p>Track my <a href="/myorders">orders</a></p>
     </div>
 
 

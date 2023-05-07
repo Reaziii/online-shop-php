@@ -1,5 +1,12 @@
 <?php
 include ROOT . "/db.php";
+include ROOT . "/views/checkout/checkout.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["addtocart"])) {
+        addToCart($_POST["addtocart"], $conn);
+    }
+}
+
 ?>
 
 
@@ -42,138 +49,48 @@ include ROOT . "/db.php";
 
         </div>
     </section>
-    <section class="sample-stores">
-        <h1>Mobile Phones</h1>
-        <p>Upgrade your life with latest smartphones</p>
-        <div class="store-tab">
-            <div class="item">
-                <img src="/assets/Apple-iPhone-12-PNG-Photo.png" alt="">
-                <div class="hidden-bg">
-                    <button class="quick-view">Quick View</button>
-                </div>
-                <button class="add-card">Add To Cart</button>
-                <div class="down-helo">
-                    <p class="cat">Mobile Phones</p>
-                    <div class="downer">
-                        <p class="name">Iphone 12 max Pro</p>
-                        <p class="price">122323/-</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="/assets/Apple-iPhone-12-PNG-Photo.png" alt="">
-                <div class="hidden-bg">
-                    <button class="quick-view">Quick View</button>
-                </div>
-                <button class="add-card">Add To Cart</button>
-                <div class="down-helo">
-                    <p class="cat">Mobile Phones</p>
-                    <div class="downer">
-                        <p class="name">Iphone 12 max Pro</p>
-                        <p class="price">122323/-</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="/assets/Apple-iPhone-12-PNG-Photo.png" alt="">
-                <div class="hidden-bg">
-                    <button class="quick-view">Quick View</button>
-                </div>
-                <button class="add-card">Add To Cart</button>
-                <div class="down-helo">
-                    <p class="cat">Mobile Phones</p>
-                    <div class="downer">
-                        <p class="name">Iphone 12 max Pro</p>
-                        <p class="price">122323/-</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="/assets/Apple-iPhone-12-PNG-Photo.png" alt="">
-                <div class="hidden-bg">
-                    <button class="quick-view">Quick View</button>
-                </div>
-                <button class="add-card">Add To Cart</button>
-                <div class="down-helo">
-                    <p class="cat">Mobile Phones</p>
-                    <div class="downer">
-                        <p class="name">Iphone 12 max Pro</p>
-                        <p class="price">122323/-</p>
-                    </div>
-                </div>
-            </div>
 
-        </div>
+    <?php
+    $catqueries = mysqli_query($conn, "SELECT * FROM catagories");
+    while ($catagory = mysqli_fetch_array($catqueries)) :
+        $catid = $catagory["id"];
+    ?>
+        <section class="sample-stores">
+            <h1><?php echo $catagory["name"] ?></h1>
 
-        <button class="show-all">Show More</button>
-    </section>
-    <section class="sample-stores">
-        <h1>Automobiles and cars</h1>
-        Find the perfect car for your lifestyle and budget at our store</p>
-        <div class="store-tab">
-            <div class="item">
-                <img src="/assets/Car-PNG-Picture.png" alt="">
-                <div class="hidden-bg">
-                    <button class="quick-view">Quick View</button>
-                </div>
-                <button class="add-card">Add To Cart</button>
-                <div class="down-helo">
-                    <p class="cat">Automobiles and Cars</p>
-                    <div class="downer">
-                        <p class="name">BMW ap001</p>
-                        <p class="price">122323/-</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="/assets/Car-PNG-Picture.png" alt="">
-                <div class="hidden-bg">
-                    <button class="quick-view">Quick View</button>
-                </div>
-                <button class="add-card">Add To Cart</button>
-                <div class="down-helo">
-                    <p class="cat">Automobiles and Cars</p>
-                    <div class="downer">
-                        <p class="name">BMW ap001</p>
-                        <p class="price">122323/-</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="/assets/Car-PNG-Picture.png" alt="">
-                <div class="hidden-bg">
-                    <button class="quick-view">Quick View</button>
-                </div>
-                <button class="add-card">Add To Cart</button>
-                <div class="down-helo">
-                    <p class="cat">Automobiles and Cars</p>
-                    <div class="downer">
-                        <p class="name">BMW ap001</p>
-                        <p class="price">122323/-</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="/assets/Car-PNG-Picture.png" alt="">
-                <div class="hidden-bg">
-                    <button class="quick-view">Quick View</button>
-                </div>
-                <button class="add-card">Add To Cart</button>
-                <div class="down-helo">
-                    <p class="cat">Automobiles and Cars</p>
-                    <div class="downer">
-                        <p class="name">BMW ap001</p>
-                        <p class="price">122323/-</p>
-                    </div>
-                </div>
-            </div>
+            <div class="store-tab">
 
-        </div>
+                <?php
+                $products = mysqli_query($conn, "SELECT * FROM products WHERE catagory=$catid LIMIT 4");
+                while ($product = mysqli_fetch_array($products)) :
+                ?>
+                    <form action method="POST" class="item">
+                        <input name="addtocart" value="<?php echo $product["id"] ?>" hidden>
+                        <img src="<?php echo $product["image"] ?>" alt="">
+                        <div class="hidden-bg">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                        <button class="add-card">Add To Cart</button>
+                        <div class="down-helo">
+                            <p class="cat"><?php echo $catagory["name"] ?></p>
+                            <div class="downer">
+                                <p class="name"><?php echo $product["name"] ?></p>
+                                <p class="price"><?php echo $product["price"] ?>/-</p>
+                            </div>
+                        </div>
+                    </form>
+                <?php endwhile; ?>
+            </div>
+            <a href="/shop/<?php echo $catagory["id"] ?>">
+                <button class="show-all">Show More</button>
+            </a>
 
-        <button class="show-all">Show More</button>
-    </section>
+        </section>
+    <?php endwhile; ?>
 
-    
+    <?php include ROOT . "/views/footer.php" ?>
+
+
 
 </body>
 <script src="/js/jquery.min.js"></script>

@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+
 ?>
 
 
@@ -24,9 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body class="shop-page">
     <?php include ROOT . "/views/header.php" ?>
     <section class="sample-stores">
+        <?php
+        if (isset($cattid)) :
+            $catagory = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM catagories WHERE id=$cattid"));
+        ?>
+            <h1 style="margin-top: 30px;" class="title"><?php echo $catagory["name"] ?></h1>
+        <?php endif ?>
         <div style="justify-content: flex-start;margin-top : 0" class="store-tab">
             <?php
             $sql = "SELECT * FROM products";
+            if (isset($cattid)) {
+                $sql = "SELECT * FROM products WHERE catagory=$cattid";
+            }
             $query = mysqli_query($conn, $sql);
 
             while ($product = mysqli_fetch_array($query)) :
@@ -56,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         </div>
     </section>
+    <?php include ROOT . "/views/footer.php" ?>
 </body>
 <script src="/js/jquery.min.js"></script>
 <script src="/carousel/owl.carousel.min.js"></script>

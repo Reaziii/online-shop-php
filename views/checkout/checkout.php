@@ -1,10 +1,15 @@
 <?php
 function checkout($pp, $id, $conn)
 {
+    if (!isset($_SESSION["userid"])) {
+        header("Location: /login");
+        die();
+        return;
+    }
     $post_data = array();
     $post_data['store_id'] = strval(STORE_ID);
     $post_data['store_passwd'] = strval(STORE_PASS);
-    $post_data['total_amount'] = 100;
+    $post_data['total_amount'] = $pp;
     $post_data['currency'] = "BDT";
     $post_data['tran_id'] = "$id";
     $post_data['success_url'] = HOME_URL . "/checkout/success";
@@ -44,6 +49,11 @@ function checkout($pp, $id, $conn)
 
 function addToCart($productid, $conn)
 {
+    if (!isset($_SESSION["userid"])) {
+        header("Location: /login");
+        die();
+        return;
+    }
     if (!isset($_SESSION["email"])) return false;
     $email = $_SESSION["email"];
     echo $email;

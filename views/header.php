@@ -14,7 +14,7 @@
                 <?php
                 if (isset($_SESSION["name"])) {
                     $name = $_SESSION["name"];
-                    $link = "/profile";
+                    $link = null;
                     if ($_SESSION["role"] == "admin") $link = "/admin";
                     echo "<a href='$link'>$name</a>";
                 } else  echo "<a href='/login'>Login</a>";
@@ -23,13 +23,20 @@
             </li>
         </ul>
         <ul class="account-items">
-            <li><a href="/profile">
-                    <img src="/assets/user.svg" alt="">
-                </a></li>
-            <!-- <li><a href="/">
-                    <img src="/assets/icons8-login-rounded-100.png" alt="">
-                </a>
-            </li> -->
+            <?php
+            if (isset($_SESSION["userid"])) :
+            ?><li>
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle abcd" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/assets/user.svg" alt="">
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/myorders">My Orders</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </li><?php endif; ?>
             <li><a href="/cart">
                     <img src="/assets/shopping-bag.svg" alt="">
                     <p>(<?php
@@ -53,12 +60,16 @@
         while ($catagory = mysqli_fetch_array($catagories)) :
 
         ?>
-            <div class="c-item">
-                <div class="icon">
-                    <img src="<?php echo $catagory["photo"] ?>">
+            <a href="/shop/<?php echo $catagory["id"] ?>">
+
+                <div class="c-item">
+                    <div class="icon">
+                        <img src="<?php echo $catagory["photo"] ?>">
+                    </div>
+                    <p><?php echo $catagory["name"] ?></p>
                 </div>
-                <p><?php echo $catagory["name"] ?></p>
-            </div>
+            </a>
+
 
         <?php endwhile; ?>
     </div>

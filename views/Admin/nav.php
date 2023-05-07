@@ -19,10 +19,9 @@ if (!isset($_SESSION["email"]) || $_SESSION["role"] != "admin") {
         <p>ELAVI BD</p>
     </div>
     <div class="menu-items">
-        <a href="/"><p>Dashboard</p></a>
+        <a href="/"><p>Home</p></a>
         <a href="/admin/catagories"><p>Catagories</p></a>
         <a href="/admin/products"><p>Products</p></a>
-        <a href="/"><p>Users</p></a>
         <a href="/admin/orders"><p>Orders</p></a>
     </div>
 </nav>

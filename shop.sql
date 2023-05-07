@@ -55,7 +55,6 @@ CREATE TABLE IF NOT EXISTS orders(
     phone VARCHAR(100) NOT NULL,
     name VARCHAR(100) NOT NULL,
     notes VARCHAR(100),
-    order_date DATE NOT NULL,
     PRIMARY key(turn_id)
 );
 
